@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools — Writers' Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #FAF7F2;
+      --warm-white: #FFFDF9;
+      --parchment: #F0E8D8;
+      --parchment-deep: #E8DCC8;
+      --tan: #D4C5A9;
+      --tan-dark: #B8A88A;
+      --brown: #7A6245;
+      --brown-dark: #3E2C1A;
+      --brown-mid: #5C4A32;
+      --brown-light: #9C8B75;
+      --text: #1A1008;
+      --text-soft: #4A3828;
+      --text-muted: #9C8B75;
+      --card-bg: #FFFFFF;
+      --card-border: #EDE3D4;
+      --accent: #7A6245;
+      --accent-light: #B8A88A;
+      --green: #4A7C59;
+      --green-light: #E8F2EC;
+      --red: #8B3A3A;
+      --red-light: #F5E8E8;
+      --amber: #7A5C1E;
+      --amber-light: #FBF3E0;
+      --shadow-sm: 0 1px 4px rgba(62,44,26,0.08);
+      --shadow-md: 0 4px 18px rgba(62,44,26,0.11);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,247,242,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1060px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 58px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem;
+      color: var(--brown-dark); text-decoration: none; letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 400; color: var(--text-soft);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--brown-dark); }
+    .nav-links a.active { color: var(--brown-dark); font-weight: 500; }
+
+    /* LAYOUT */
+    .page-wrap { max-width: 1060px; margin: 0 auto; padding: 0 2rem; }
+
+    /* HERO */
+    .hero { padding: 4rem 0 3rem; }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--brown-dark); letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em {
+      font-style: italic; font-weight: 400; color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 0.95rem; color: var(--text-soft);
+      max-width: 760px; line-height: 1.75; font-weight: 300;
+    }
+
+    /* TOOL SECTIONS */
+    .tool-section {
+      padding: 3.5rem 0;
+      border-top: 1px solid var(--card-border);
+    }
+    .section-label {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+      font-weight: 400; color: var(--brown-dark);
+      margin-bottom: 0.4rem;
+    }
+    .section-intro {
+      color: var(--text-soft); font-size: 0.88rem; font-weight: 300;
+      max-width: 820px; line-height: 1.7; margin-bottom: 2rem;
+    }
+
+    /* TOOL CARD WRAPPER */
+    .tool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-top: 2px solid var(--tan-dark);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    /* ── DECISION TREE SHARED STYLES ── */
+    .tree-container { padding: 2rem; }
+
+    .tree-step {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+    .tree-step.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-header {
+      display: flex; align-items: flex-start; gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .step-num {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; color: var(--text-muted);
+      background: var(--parchment); padding: 0.3rem 0.55rem;
+      border-radius: 4px; white-space: nowrap; margin-top: 0.2rem;
+      flex-shrink: 0;
+    }
+    .step-question {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 400;
+      color: var(--brown-dark); line-height: 1.3;
+    }
+    .step-question small {
+      display: block; font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 300; color: var(--text-muted);
+      margin-top: 0.3rem; font-style: normal;
+    }
+
+    /* CHOICE BUTTONS */
+    .choices { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.5rem; }
+    .choice-btn {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      background: var(--cream); border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm); padding: 0.85rem 1rem;
+      cursor: pointer; text-align: left; transition: all 0.18s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .choice-btn:hover {
+      background: var(--parchment); border-color: var(--tan-dark);
+      transform: translateX(2px);
+    }
+    .choice-icon {
+      font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem;
+    }
+    .choice-text { flex: 1; }
+    .choice-label {
+      font-size: 0.88rem; font-weight: 500; color: var(--brown-dark);
+      display: block; margin-bottom: 0.15rem;
+    }
+    .choice-desc {
+      font-size: 0.8rem; font-weight: 300; color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* RESULT BOXES */
+    .result-box {
+      border-radius: var(--radius-sm); padding: 1.25rem 1.4rem;
+      margin-bottom: 1rem; border-left: 3px solid;
+    }
+    .result-box.green {
+      background: var(--green-light); border-color: var(--green);
+    }
+    .result-box.red {
+      background: var(--red-light); border-color: var(--red);
+    }
+    .result-box.amber {
+      background: var(--amber-light); border-color: var(--amber);
+    }
+    .result-box.neutral {
+      background: var(--parchment); border-color: var(--tan-dark);
+    }
+    .result-title {
+      font-weight: 500; font-size: 0.88rem;
+      margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .result-box.green .result-title { color: var(--green); }
+    .result-box.red .result-title { color: var(--red); }
+    .result-box.amber .result-title { color: var(--amber); }
+    .result-box.neutral .result-title { color: var(--brown-dark); }
+    .result-body {
+      font-size: 0.83rem; font-weight: 300; color: var(--text-soft);
+      line-height: 1.6;
+    }
+    .result-body strong { font-weight: 500; color: var(--text); }
+    .result-body ul { padding-left: 1.2rem; margin-top: 0.4rem; }
+    .result-body ul li { margin-bottom: 0.2rem; }
+
+    /* REF CHIPS */
+    .ref-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+    .ref-chip {
+      font-family: 'DM Mono', monospace; font-size: 0.67rem;
+      letter-spacing: 0.05em; background: var(--parchment);
+      color: var(--brown-mid); border: 1px solid var(--tan);
+      padding: 0.18rem 0.55rem; border-radius: 20px;
+    }
+
+    /* WARNING BOXES */
+    .warn-box {
+      background: var(--amber-light); border: 1px solid #D4A843;
+      border-radius: var(--radius-sm); padding: 0.85rem 1rem;
+      margin-bottom: 1rem; font-size: 0.82rem;
+      color: var(--text-soft); line-height: 1.55;
+    }
+    .warn-box strong { color: var(--amber); }
+
+    /* PROGRESS BAR */
+    .progress-track {
+      display: flex; gap: 0.3rem; margin-bottom: 1.75rem;
+    }
+    .progress-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--tan); transition: background 0.2s;
+    }
+    .progress-dot.done { background: var(--accent); }
+    .progress-dot.current { background: var(--brown-dark); width: 18px; border-radius: 3px; }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      font-size: 0.78rem; color: var(--text-muted);
+      margin-bottom: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem;
+    }
+    .breadcrumb span { color: var(--text-soft); font-weight: 400; }
+    .breadcrumb .sep { color: var(--tan-dark); }
+
+    /* BACK + RESET */
+    .tree-nav { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+    .btn-back, .btn-reset {
+      font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+      padding: 0.45rem 1rem; border-radius: var(--radius-sm);
+      cursor: pointer; transition: all 0.18s; border: 1px solid;
+    }
+    .btn-back {
+      background: transparent; color: var(--text-muted);
+      border-color: var(--tan);
+    }
+    .btn-back:hover { background: var(--parchment); color: var(--text-soft); }
+    .btn-reset {
+      background: transparent; color: var(--text-muted);
+      border-color: var(--tan);
+    }
+    .btn-reset:hover { background: var(--parchment); color: var(--text-soft); }
+
+    /* OUTCOME HEADER */
+    .outcome-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .outcome-badge {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; border-radius: 20px;
+    }
+    .outcome-badge.green { background: var(--green-light); color: var(--green); }
+    .outcome-badge.amber { background: var(--amber-light); color: var(--amber); }
+    .outcome-badge.red { background: var(--red-light); color: var(--red); }
+
+    /* ── GLOBAL ROUTING TOOL ── */
+    .routing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .region-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-top: 2px solid var(--tan-dark);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .region-header {
+      padding: 1rem 1.25rem 0.85rem;
+      border-bottom: 1px solid var(--card-border);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      user-select: none;
+    }
+    .region-header:hover { background: var(--parchment); }
+    .region-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 500; color: var(--brown-dark);
+    }
+    .region-system {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      color: var(--text-muted); margin-top: 0.2rem;
+    }
+    .region-toggle { color: var(--text-muted); font-size: 0.85rem; transition: transform 0.2s; }
+    .region-toggle.open { transform: rotate(180deg); }
+
+    .region-body { display: none; }
+    .region-body.open { display: block; }
+
+    .region-accordion { border-bottom: 1px solid var(--card-border); }
+    .region-accordion:last-child { border-bottom: none; }
+    .acc-header {
+      padding: 0.7rem 1.25rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.82rem; font-weight: 500; color: var(--brown-mid);
+      user-select: none;
+    }
+    .acc-header:hover { background: var(--cream); }
+    .acc-chevron { color: var(--text-muted); font-size: 0.75rem; transition: transform 0.2s; }
+    .acc-chevron.open { transform: rotate(180deg); }
+    .acc-body {
+      display: none; padding: 0 1.25rem 1rem;
+      font-size: 0.82rem; color: var(--text-soft); line-height: 1.65;
+    }
+    .acc-body.open { display: block; }
+    .acc-body p { margin-bottom: 0.5rem; }
+    .acc-body p:last-child { margin-bottom: 0; }
+    .acc-body strong { font-weight: 500; color: var(--text); }
+    .watchout {
+      background: var(--amber-light); border-left: 2px solid var(--amber);
+      padding: 0.5rem 0.75rem; border-radius: 4px;
+      margin-top: 0.5rem; font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+    .watchout strong { color: var(--amber); }
+
+    /* mandatory badge */
+    .mandatory-tag {
+      font-family: 'DM Mono', monospace; font-size: 0.63rem;
+      letter-spacing: 0.06em; padding: 0.15rem 0.5rem;
+      border-radius: 3px; margin-left: 0.5rem;
+    }
+    .mandatory-tag.yes { background: var(--green-light); color: var(--green); }
+    .mandatory-tag.conditional { background: var(--amber-light); color: var(--amber); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2rem 0; margin-top: 3rem;
+    }
+    .footer-inner {
+      max-width: 1060px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-text {
+      font-size: 0.78rem; color: var(--text-muted); font-weight: 300;
+    }
+    .footer-text a { color: var(--accent); text-decoration: none; }
+    .footer-disclaimer {
+      font-size: 0.73rem; color: var(--text-muted); font-weight: 300;
+      max-width: 560px; line-height: 1.55; text-align: right;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .routing-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+      .footer-disclaimer { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="writers-desk_5.html" class="nav-logo">Writers' Desk</a>
+    <ul class="nav-links">
+      <li><a href="writers-desk_5.html">Home</a></li>
+      <li><a href="writers-desk-tools.html" class="active">Tools</a></li>
+      <li><a href="writers-desk-glossary.html">Glossary</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="hero">
+    <p class="section-label">Tools</p>
+    <h1>Decision trees &amp; <em>routing guides</em></h1>
+    <p class="hero-sub">Interactive reference tools for clinical trial registration, submission, and disclosure. Select your scenario and follow the branch — each tool surfaces the relevant requirements, deadlines, and watchouts for your situation.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       TOOL 1: CTIS SUBMISSION DECISION TREE
+  ═══════════════════════════════════════════ -->
+  <div class="tool-section" id="ctis-tree">
+    <p class="section-label">Tool 01</p>
+    <p class="section-title">CTIS Submission Decision Tree</p>
+    <p class="section-intro">Navigate CTIS document selection, publication rules, and submission requirements by trial phase and lifecycle stage. Based on EU CTR 536/2014 and EMA/298962/2024.</p>
+
+    <div class="tool-card">
+      <div class="tree-container" id="ctis-tree-container">
+        <!-- Step 0: Phase -->
+        <div class="tree-step active" id="ctis-s0">
+          <div class="progress-track">
+            <div class="progress-dot current"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+          <div class="step-header">
+            <span class="step-num">Step 1</span>
+            <div class="step-question">What is the trial phase / category?
+              <small>EU CTR category determines publication obligations throughout the trial lifecycle.</small>
+            </div>
+          </div>
+          <div class="choices">
+            <button class="choice-btn" onclick="ctisGo('s1-phase1')">
+              <span class="choice-icon">🔬</span>
+              <span class="choice-text">
+                <span class="choice-label">Phase I / Category 1</span>
+                <span class="choice-desc">First-in-human or healthy volunteer studies. Limited publication obligations.</span>
+              </span>
+            </button>
+            <button class="choice-btn" onclick="ctisGo('s1-phase2')">
+              <span class="choice-icon">🔄</span>
+              <span class="choice-text">
+                <span class="choice-label">Phase I–II or II–III / Category 2</span>
+                <span class="choice-desc">Mixed adult/paediatric or bridging studies. Extended publication.</span>
+              </span>
+            </button>
+            <button class="choice-btn" onclick="ctisGo('s1-phase3')">
+              <span class="choice-icon">📋</span>
+              <span class="choice-text">
+                <span class="choice-label">Phase III / Category 3</span>
+                <span class="choice-desc">Pivotal trials — adult or paediatric. Full publication obligations.</span>
+              </span>
+            </button>
+            <button class="choice-btn" onclick="ctisGo('s1-phase4')">
+              <span class="choice-icon">✅</span>
+              <span class="choice-text">
+                <span class="choice-label">Phase IV / Category 3 / PASS</span>
+                <span class="choice-desc">Post-authorisation. Includes PASS-specific PRAC/ENCePP obligations.</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 1 variants: lifecycle -->
+        <div class="tree-step" id="ctis-s1-phase1">
+          <div class="progress-track">
+            <div class="progress-dot done"></div>
+            <div class="progress-dot current"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+          <div class="breadcrumb"><span>Phase I / Cat. 1</span></div>
+          <div class="step-header">
+            <span class="step-num">Step 2</span>
+            <div class="step-question">Select the lifecycle stage</div>
+          </div>
+          <div class="choices">
+            <button class="choice-btn" onclick="ctisGo('s2-p1-initial')"><span class="choice-icon">📝</span><span class="choice-text"><span class="choice-label">Initial CTA</span><span class="choice-desc">First submission to authorise the trial.</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p1-ongoing')"><span class="choice-icon">🔄</span><span class="choice-text"><span class="choice-label">Ongoing Trial</span><span class="choice-desc">Maintenance, notifications, safety reporting.</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p1-sm')"><span class="choice-icon">✏️</span><span class="choice-text"><span class="choice-label">Substantial Modification</span><span class="choice-desc">Protocol amendment or significant change requiring authorisation.</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p1-safety')"><span class="choice-icon">⚠️</span><span class="choice-text"><span class="choice-label">Safety Reporting</span><span class="choice-desc">SUSARs, ASR, Urgent Safety Measures.</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p1-eot')"><span class="choice-icon">🏁</span><span class="choice-text"><span class="choice-label">End of Trial</span><span class="choice-desc">EoT notification and results submission.</span></span></button>
+          </div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s0')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <div class="tree-step" id="ctis-s1-phase2">
+          <div class="progress-track">
+            <div class="progress-dot done"></div>
+            <div class="progress-dot current"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+          <div class="breadcrumb"><span>Phase I–II / II–III / Cat. 2</span></div>
+          <div class="step-header">
+            <span class="step-num">Step 2</span>
+            <div class="step-question">Select the lifecycle stage</div>
+          </div>
+          <div class="choices">
+            <button class="choice-btn" onclick="ctisGo('s2-p23-initial')"><span class="choice-icon">📝</span><span class="choice-text"><span class="choice-label">Initial CTA</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-ongoing')"><span class="choice-icon">🔄</span><span class="choice-text"><span class="choice-label">Ongoing Trial</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-sm')"><span class="choice-icon">✏️</span><span class="choice-text"><span class="choice-label">Substantial Modification</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-safety')"><span class="choice-icon">⚠️</span><span class="choice-text"><span class="choice-label">Safety Reporting</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-eot')"><span class="choice-icon">🏁</span><span class="choice-text"><span class="choice-label">End of Trial</span></span></button>
+          </div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s0')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <div class="tree-step" id="ctis-s1-phase3">
+          <div class="progress-track">
+            <div class="progress-dot done"></div>
+            <div class="progress-dot current"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+          <div class="breadcrumb"><span>Phase III / Cat. 3</span></div>
+          <div class="step-header">
+            <span class="step-num">Step 2</span>
+            <div class="step-question">Select the lifecycle stage</div>
+          </div>
+          <div class="choices">
+            <button class="choice-btn" onclick="ctisGo('s2-p23-initial')"><span class="choice-icon">📝</span><span class="choice-text"><span class="choice-label">Initial CTA</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-ongoing')"><span class="choice-icon">🔄</span><span class="choice-text"><span class="choice-label">Ongoing Trial</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-sm')"><span class="choice-icon">✏️</span><span class="choice-text"><span class="choice-label">Substantial Modification</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-safety')"><span class="choice-icon">⚠️</span><span class="choice-text"><span class="choice-label">Safety Reporting</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-eot')"><span class="choice-icon">🏁</span><span class="choice-text"><span class="choice-label">End of Trial</span></span></button>
+          </div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s0')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <div class="tree-step" id="ctis-s1-phase4">
+          <div class="progress-track">
+            <div class="progress-dot done"></div>
+            <div class="progress-dot current"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+          <div class="breadcrumb"><span>Phase IV / Cat. 3 / PASS</span></div>
+          <div class="step-header">
+            <span class="step-num">Step 2</span>
+            <div class="step-question">Is this a Post-Authorisation Safety Study (PASS)?</div>
+          </div>
+          <div class="choices">
+            <button class="choice-btn" onclick="ctisGo('s2-pass-check')"><span class="choice-icon">✅</span><span class="choice-text"><span class="choice-label">Yes — this is a PASS</span><span class="choice-desc">PRAC/ENCePP obligations apply. Interventional PASS → CTIS + ENCePP.</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-initial')"><span class="choice-icon">➡️</span><span class="choice-text"><span class="choice-label">No — standard Phase IV interventional study</span><span class="choice-desc">Proceed with standard CTIS document set.</span></span></button>
+          </div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s0')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- PASS check -->
+        <div class="tree-step" id="ctis-s2-pass-check">
+          <div class="breadcrumb"><span>Phase IV</span><span class="sep">›</span><span>PASS</span></div>
+          <div class="warn-box">⚠️ <strong>PRAC-imposed PASS:</strong> obtain PRAC Protocol Opinion BEFORE initiating. Register in EU PAS Register (ENCePP) before study start. Non-interventional PASS: ENCePP ONLY — not CTIS.</div>
+          <div class="step-header">
+            <span class="step-num">Step 3</span>
+            <div class="step-question">Select the lifecycle stage</div>
+          </div>
+          <div class="choices">
+            <button class="choice-btn" onclick="ctisGo('s2-p23-initial')"><span class="choice-icon">📝</span><span class="choice-text"><span class="choice-label">Initial CTA / PASS Registration</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-pass-ongoing')"><span class="choice-icon">🔄</span><span class="choice-text"><span class="choice-label">Ongoing Trial</span><span class="choice-desc">Including PRAC interim progress reports.</span></span></button>
+            <button class="choice-btn" onclick="ctisGo('s2-p23-eot')"><span class="choice-icon">🏁</span><span class="choice-text"><span class="choice-label">End of Trial / Final Study Report</span></span></button>
+          </div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase4')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- ── OUTCOME PAGES ── -->
+
+        <!-- Phase I Initial CTA -->
+        <div class="tree-step" id="ctis-s2-p1-initial">
+          <div class="breadcrumb"><span>Phase I / Cat. 1</span><span class="sep">›</span><span>Initial CTA</span></div>
+          <div class="outcome-header"><span class="outcome-badge green">Initial CTA</span></div>
+
+          <div class="result-box neutral">
+            <div class="result-title">📋 Part I — Common Documents (assessed by RMS)</div>
+            <div class="result-body">
+              <strong>Protocol:</strong> FOR PUBLICATION. Two versions: unredacted (not-for-pub slot) + redacted (for-pub slot). Remove file metadata. Redact subject IDs, investigator names, CCI, IP-sensitive data.<br><br>
+              <strong>IB:</strong> NOT FOR PUBLICATION. Cat. 1: always required. ONE version → not-for-pub slot only. ⚠ Do NOT place in SmPC slot.<br><br>
+              <strong>IMPD:</strong> If IMP is NOT authorised → full IMPD (Quality + Safety + Efficacy) + IB. If IMP IS authorised → Simplified IMPD cross-referencing SmPC/EPAR + current SmPC. SmPC published for Cat. 2 &amp; 3 only.
+            </div>
+          </div>
+
+          <div class="result-box neutral">
+            <div class="result-title">📂 Part II — National Documents (per MSC)</div>
+            <div class="result-body">
+              Ethics Committee Opinion — NOT published (outcome as structured data only)<br>
+              Insurance / Indemnity — NOT published<br>
+              PI Curriculum Vitae — NOT published<br>
+              <strong>ICF — NOT FOR PUBLICATION for Cat. 1.</strong> ONE version → not-for-pub slot.
+            </div>
+          </div>
+
+          <div class="result-box amber">
+            <div class="result-title">⚠️ EudraCT / Paediatric Check</div>
+            <div class="result-body">
+              Four scenarios still require EudraCT or PDCO involvement:<br>
+              <ul>
+                <li><strong>PIP trial with EU/EEA sites:</strong> Register in CTIS. Attach PDCO opinion + PIP Compliance Statement.</li>
+                <li><strong>PIP/Art.46 exclusively outside EEA:</strong> Register in EudraCT Third Country File — NOT CTIS.</li>
+                <li><strong>Art.46 study (MAH-sponsored):</strong> Submit to competent authority within 6 months of completion.</li>
+                <li><strong>Grandfathered trial (not transitioned by 30 Jan 2025):</strong> Remains on EudraCT only.</li>
+              </ul>
+              ℹ️ None apply? CTIS is the sole registration system.
+            </div>
+          </div>
+
+          <div class="result-box red">
+            <div class="result-title">🚨 RFI Watch — Check CTIS Daily After Submission</div>
+            <div class="result-body">
+              CTIS sends NO email alerts for RFIs. Failure to respond within deadline causes application to lapse automatically.<br><br>
+              <strong>Validation RFI (days 1–10):</strong> ≤10 days to respond. Non-response = lapses.<br>
+              <strong>Assessment RFI Part I (days 1–45):</strong> 12 days to respond. Non-response = LAPSES.<br>
+              <strong>Assessment RFI Part II:</strong> 12 days per MSC RFI.
+            </div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 73–74</span><span class="ref-chip">EMA/369130/2022</span><span class="ref-chip">EMA/298962/2024 §3–4</span><span class="ref-chip">EU CTR Art. 5–8</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase1')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Phase I Ongoing -->
+        <div class="tree-step" id="ctis-s2-p1-ongoing">
+          <div class="breadcrumb"><span>Phase I / Cat. 1</span><span class="sep">›</span><span>Ongoing Trial</span></div>
+          <div class="outcome-header"><span class="outcome-badge amber">Ongoing Trial</span></div>
+          <div class="result-box neutral">
+            <div class="result-title">📅 Annual Safety Report (ASR)</div>
+            <div class="result-body"><strong>Deadline:</strong> within 60 days of data lock date. Submit via CTIS to RMS/MSC. NOT published. ONE version → not-for-pub slot. One ASR may cover all IMPs.</div>
+          </div>
+          <div class="result-box red">
+            <div class="result-title">🚨 SUSARs → EudraVigilance ONLY</div>
+            <div class="result-body">Fatal/life-threatening: <strong>7-day deadline.</strong> All other: <strong>15 days.</strong> DO NOT submit via CTIS. (EU CTR Art. 42)</div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">📋 Protocol Changes &amp; Notifications</div>
+            <div class="result-body">Protocol change required? → Substantial Modification (formal CTIS authorisation needed).<br>No change? → Non-Substantial Modification (notification only).<br><br>Lifecycle notifications via CTIS: recruitment start/end, temporary halt, restart, early termination, adding new MSC.</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 43(2)</span><span class="ref-chip">EU CTR Art. 42</span><span class="ref-chip">EU CTR Art. 36–38</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase1')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Phase I SM -->
+        <div class="tree-step" id="ctis-s2-p1-sm">
+          <div class="breadcrumb"><span>Phase I / Cat. 1</span><span class="sep">›</span><span>Substantial Modification</span></div>
+          <div class="outcome-header"><span class="outcome-badge amber">Substantial Modification</span></div>
+          <div class="result-box neutral">
+            <div class="result-title">📋 SM Application Dossier</div>
+            <div class="result-body">
+              <strong>Protocol Amendment:</strong> FOR PUBLICATION. Clean version (for-pub) + track-changes for MSC review only.<br>
+              ⚠️ Track-changes version is for MSC review ONLY — do NOT upload to the for-publication placeholder.<br><br>
+              <strong>Updated ICF:</strong> FOR PUBLICATION (Cat. 2 &amp; 3). Redacted for-pub version required. Not required for Cat. 1.<br><br>
+              <strong>IMPD / IB:</strong> Update if IMP status changed. Authorised IMP → update Simplified IMPD/SmPC. Non-authorised → update full IMPD and IB.
+            </div>
+          </div>
+          <div class="result-box red">
+            <div class="result-title">⏱ SM RFI Deadlines</div>
+            <div class="result-body">
+              <strong>SM Part I RFI (raised by RMS):</strong> 12 days to respond. Non-response = SM lapses. Timeline extended up to +31 days.<br>
+              <strong>SM Part II RFI (per MSC):</strong> 12 days per MSC. Independent of other MSCs.
+            </div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 15–16</span><span class="ref-chip">EMA/298962/2024 §4.2</span><span class="ref-chip">EMA/369130/2022 §4</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase1')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Safety Reporting (shared) -->
+        <div class="tree-step" id="ctis-s2-p1-safety">
+          <div class="breadcrumb"><span>Safety Reporting</span></div>
+          <div class="outcome-header"><span class="outcome-badge red">Safety Reporting</span></div>
+          <div class="result-box red">
+            <div class="result-title">🚨 SUSARs → EudraVigilance ONLY — NEVER CTIS</div>
+            <div class="result-body">Fatal/life-threatening: <strong>7-day deadline.</strong> All other: <strong>15 days.</strong> This is a frequent and serious submission error. (EU CTR Art. 42; ICH E2A)</div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">📅 Annual Safety Report (ASR)</div>
+            <div class="result-body">Due each year. Submitted via CTIS to RMS/MSC. NOT published. One ASR may cover all IMPs. (EU CTR Art. 43)</div>
+          </div>
+          <div class="result-box amber">
+            <div class="result-title">⚡ Urgent Safety Measure (USM)</div>
+            <div class="result-body">If trial poses immediate risk: notify via CTIS immediately. Then submit SM within 15 days. (EU CTR Art. 54)</div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">📋 Other Safety Notifications via CTIS</div>
+            <div class="result-body">Temporary halt (safety-related), safety-related protocol deviations. (EU CTR Art. 35 &amp; 38)</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 42</span><span class="ref-chip">EU CTR Art. 43</span><span class="ref-chip">EU CTR Art. 54</span><span class="ref-chip">ICH E2A</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase1')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Phase I EoT -->
+        <div class="tree-step" id="ctis-s2-p1-eot">
+          <div class="breadcrumb"><span>Phase I / Cat. 1</span><span class="sep">›</span><span>End of Trial</span></div>
+          <div class="outcome-header"><span class="outcome-badge green">End of Trial</span></div>
+          <div class="result-box neutral">
+            <div class="result-title">🏁 Step 1 — EoT Notification</div>
+            <div class="result-body">Notify via CTIS within <strong>15 days</strong> of end of trial in the last Member State. (EU CTR Art. 36(1))</div>
+          </div>
+          <div class="result-box green">
+            <div class="result-title">📊 Step 2 — Results via CTIS Results Module</div>
+            <div class="result-body">
+              <strong>CSR:</strong> FOR PUBLICATION. All categories. Deadline: within 30 days of EoT notification. Two versions: unredacted + redacted. Redact: patient-level data, investigator names, CCI.<br><br>
+              <strong>Lay Summary:</strong> FOR PUBLICATION. All categories. Deadline: 12 months after EoT (6 months if paediatric population).<br><br>
+              ⚠️ Results published for ALL categories (Cat. 1, 2, and 3) — no exemptions based on phase.
+            </div>
+          </div>
+          <div class="result-box red">
+            <div class="result-title">⚠️ Structured Data Check</div>
+            <div class="result-body">Confirm all CTIS structured data fields are free of personal data and CCI — cannot be redacted post-submission. (EU CTR Art. 81(4); GDPR Art. 5)</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 36(1)</span><span class="ref-chip">EU CTR Art. 37</span><span class="ref-chip">EU CTR Art. 81(1)</span><span class="ref-chip">EMA/298962/2024 §5</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase1')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Cat 2/3 Initial CTA -->
+        <div class="tree-step" id="ctis-s2-p23-initial">
+          <div class="breadcrumb"><span>Cat. 2 / 3</span><span class="sep">›</span><span>Initial CTA</span></div>
+          <div class="outcome-header"><span class="outcome-badge green">Initial CTA</span></div>
+
+          <div class="result-box neutral">
+            <div class="result-title">📋 Part I — Common Documents</div>
+            <div class="result-body">
+              <strong>Protocol:</strong> FOR PUBLICATION. Two versions: unredacted + redacted. Remove file metadata.<br><br>
+              <strong>IB:</strong> NOT FOR PUBLICATION. Cat. 2/3: required ONLY if IMP is non-authorised. ONE version → not-for-pub slot only. ⚠ Do NOT place in SmPC slot.<br><br>
+              <strong>IMPD:</strong> Non-authorised IMP → full IMPD + IB (neither published). Authorised IMP → Simplified IMPD + current SmPC. <strong>SmPC published for Cat. 2 &amp; 3</strong> on authorisation decision.
+            </div>
+          </div>
+
+          <div class="result-box green">
+            <div class="result-title">📂 Part II — National Documents (Cat. 2 &amp; 3 differences)</div>
+            <div class="result-body">
+              Ethics Committee Opinion — NOT published<br>
+              Insurance / Indemnity — NOT published<br>
+              PI Curriculum Vitae — NOT published<br>
+              <strong>ICF — FOR PUBLICATION (Cat. 2 &amp; 3).</strong> Two versions: unredacted + redacted. Redact: investigator names, site contacts, track-change metadata.<br>
+              <strong>Recruitment Arrangements — FOR PUBLICATION (Cat. 2 &amp; 3).</strong> Two versions required. Redact: site phone numbers, individual investigator contacts, financial incentive amounts.
+            </div>
+          </div>
+
+          <div class="result-box amber">
+            <div class="result-title">⚠️ EudraCT / Paediatric Check (same as Cat. 1)</div>
+            <div class="result-body">PIP trial with EU/EEA sites → CTIS + PDCO opinion. PIP/Art.46 exclusively outside EEA → EudraCT Third Country File. Grandfathered trial → EudraCT only.</div>
+          </div>
+
+          <div class="result-box red">
+            <div class="result-title">🚨 RFI Watch — Check CTIS Daily</div>
+            <div class="result-body">
+              <strong>Validation RFI (days 1–10):</strong> ≤10 days. Non-response = lapses.<br>
+              <strong>Assessment RFI Part I (days 1–45):</strong> 12 days. Non-response = LAPSES.<br>
+              <strong>Assessment RFI Part II:</strong> 12 days per MSC.
+            </div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 5–8</span><span class="ref-chip">EMA/298962/2024 §3–4</span><span class="ref-chip">EU CTR Art. 25</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase2')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Cat 2/3 Ongoing -->
+        <div class="tree-step" id="ctis-s2-p23-ongoing">
+          <div class="breadcrumb"><span>Cat. 2 / 3</span><span class="sep">›</span><span>Ongoing Trial</span></div>
+          <div class="outcome-header"><span class="outcome-badge amber">Ongoing Trial</span></div>
+          <div class="result-box neutral">
+            <div class="result-title">📅 Annual Safety Report (ASR)</div>
+            <div class="result-body"><strong>Deadline:</strong> within 60 days of data lock date. NOT published. ONE version → not-for-pub slot.</div>
+          </div>
+          <div class="result-box red">
+            <div class="result-title">🚨 SUSARs → EudraVigilance ONLY</div>
+            <div class="result-body">Fatal/life-threatening: <strong>7 days.</strong> All other: <strong>15 days.</strong> DO NOT submit via CTIS.</div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">📋 Protocol Changes</div>
+            <div class="result-body">Substantial change → SM required (formal authorisation). No substantial change → NSM notification only via CTIS.</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 43(2)</span><span class="ref-chip">EU CTR Art. 42</span><span class="ref-chip">EU CTR Art. 36–38</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase2')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Cat 2/3 SM -->
+        <div class="tree-step" id="ctis-s2-p23-sm">
+          <div class="breadcrumb"><span>Cat. 2 / 3</span><span class="sep">›</span><span>Substantial Modification</span></div>
+          <div class="outcome-header"><span class="outcome-badge amber">Substantial Modification</span></div>
+          <div class="result-box neutral">
+            <div class="result-title">📋 SM Application Dossier</div>
+            <div class="result-body">
+              <strong>Protocol Amendment:</strong> FOR PUBLICATION. Clean (for-pub) + track-changes for MSC review ONLY. ⚠ Track-changes: do NOT upload to for-publication placeholder.<br><br>
+              <strong>Updated ICF:</strong> FOR PUBLICATION (Cat. 2 &amp; 3). Redacted for-pub version required.<br><br>
+              <strong>IMPD/IB:</strong> Authorised IMP → update Simplified IMPD/SmPC (publish updated SmPC on SM decision for Cat. 2/3). Non-authorised → update full IMPD + IB.
+            </div>
+          </div>
+          <div class="result-box red">
+            <div class="result-title">⏱ SM RFI Deadlines</div>
+            <div class="result-body"><strong>Part I (by RMS):</strong> 12 days. Non-response = SM lapses.<br><strong>Part II (per MSC):</strong> 12 days per MSC RFI.</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 15–16</span><span class="ref-chip">EMA/298962/2024 §4.2</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase2')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Cat 2/3 Safety (reuse) -->
+        <div class="tree-step" id="ctis-s2-p23-safety">
+          <div class="breadcrumb"><span>Cat. 2 / 3</span><span class="sep">›</span><span>Safety Reporting</span></div>
+          <div class="outcome-header"><span class="outcome-badge red">Safety Reporting</span></div>
+          <div class="result-box red">
+            <div class="result-title">🚨 SUSARs → EudraVigilance ONLY</div>
+            <div class="result-body">Fatal/life-threatening: <strong>7-day deadline.</strong> All other: <strong>15 days.</strong> DO NOT submit via CTIS. (EU CTR Art. 42; ICH E2A)</div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">📅 Annual Safety Report (ASR)</div>
+            <div class="result-body">Due annually. Via CTIS to RMS/MSC. NOT published. (EU CTR Art. 43)</div>
+          </div>
+          <div class="result-box amber">
+            <div class="result-title">⚡ Urgent Safety Measure (USM)</div>
+            <div class="result-body">Immediate risk → notify via CTIS immediately. Submit SM within 15 days. (EU CTR Art. 54)</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 42</span><span class="ref-chip">EU CTR Art. 43</span><span class="ref-chip">EU CTR Art. 54</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase2')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Cat 2/3 EoT -->
+        <div class="tree-step" id="ctis-s2-p23-eot">
+          <div class="breadcrumb"><span>Cat. 2 / 3</span><span class="sep">›</span><span>End of Trial</span></div>
+          <div class="outcome-header"><span class="outcome-badge green">End of Trial</span></div>
+          <div class="result-box neutral">
+            <div class="result-title">🏁 EoT Notification</div>
+            <div class="result-body">Notify via CTIS within <strong>15 days</strong> of end of trial in the last MS.</div>
+          </div>
+          <div class="result-box green">
+            <div class="result-title">📊 Results Submission</div>
+            <div class="result-body">
+              <strong>CSR:</strong> FOR PUBLICATION — ALL categories. Deadline: 30 days after EoT notification. Redact: patient-level data, investigator names, CCI.<br><br>
+              <strong>Lay Summary:</strong> FOR PUBLICATION — ALL categories. Deadline: 12 months after EoT (6 months if paediatric).<br><br>
+              <strong>SmPC:</strong> Updated SmPC published on SM authorisation decision (Cat. 2/3).
+            </div>
+          </div>
+          <div class="result-box red">
+            <div class="result-title">⚠️ Structured Data Check</div>
+            <div class="result-body">Confirm all CTIS structured data fields are free of personal data and CCI before submitting — cannot be redacted post-submission.</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">EU CTR Art. 36–37</span><span class="ref-chip">EU CTR Art. 81(1)</span><span class="ref-chip">EMA/298962/2024 §5</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s1-phase2')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- PASS Ongoing -->
+        <div class="tree-step" id="ctis-s2-pass-ongoing">
+          <div class="breadcrumb"><span>Phase IV / PASS</span><span class="sep">›</span><span>Ongoing Trial</span></div>
+          <div class="outcome-header"><span class="outcome-badge amber">PASS — Ongoing</span></div>
+          <div class="result-box neutral">
+            <div class="result-title">📅 Standard obligations + PASS-specific</div>
+            <div class="result-body">
+              ASR: annually via CTIS, NOT published.<br>
+              SUSARs: EudraVigilance ONLY.<br><br>
+              <strong>PRAC-imposed PASS:</strong> submit interim progress reports per agreed schedule via CTIS. Reports ARE published. Update EU PAS Register on submission. (GVP Module VIII Rev 3 §VIII.C.3)
+            </div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">GVP Module VIII Rev 3</span><span class="ref-chip">EU CTR Art. 43</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctisBack('s2-pass-check')">← Back</button><button class="btn-reset" onclick="ctisReset()">↺ Start over</button></div>
+        </div>
+
+      </div><!-- /tree-container -->
+    </div><!-- /tool-card -->
+  </div><!-- /tool-section -->
+
+
+  <!-- ═══════════════════════════════════════════
+       TOOL 2: CT.GOV DECISION TREE
+  ═══════════════════════════════════════════ -->
+  <div class="tool-section" id="ctgov-tree">
+    <p class="section-label">Tool 02</p>
+    <p class="section-title">ClinicalTrials.gov Decision Tree</p>
+    <p class="section-intro">Determine registration and results submission obligations for US-based or FDA-regulated trials under FDAAA 801 / 42 CFR Part 11. Covers both Applicable Clinical Trials (ACTs) and NIH-funded studies.</p>
+
+    <div class="tool-card">
+      <div class="tree-container" id="ctgov-tree-container">
+
+        <!-- Step 0: Is this an ACT? -->
+        <div class="tree-step active" id="ctgov-s0">
+          <div class="progress-track">
+            <div class="progress-dot current"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+          </div>
+          <div class="step-header">
+            <span class="step-num">Step 1</span>
+            <div class="step-question">Is this an Applicable Clinical Trial (ACT)?
+              <small>ACTs under FDAAA 801 / 42 CFR §11.10: generally Phase II–IV drug/biologic/device trials with US sites or under FDA IND/IDE.</small>
+            </div>
+          </div>
+          <div class="choices">
+            <button class="choice-btn" onclick="ctgovGo('s1-act-yes')">
+              <span class="choice-icon">✅</span>
+              <span class="choice-text">
+                <span class="choice-label">Yes — this is an ACT</span>
+                <span class="choice-desc">Phase II–IV, US sites or FDA IND/IDE. Mandatory registration and results.</span>
+              </span>
+            </button>
+            <button class="choice-btn" onclick="ctgovGo('s1-phase1')">
+              <span class="choice-icon">🔬</span>
+              <span class="choice-text">
+                <span class="choice-label">Phase I — generally exempt from ACT status</span>
+                <span class="choice-desc">Voluntary registration. NIH-funded? Different rules apply.</span>
+              </span>
+            </button>
+            <button class="choice-btn" onclick="ctgovGo('s1-nih')">
+              <span class="choice-icon">🏛️</span>
+              <span class="choice-text">
+                <span class="choice-label">NIH-funded trial (any phase)</span>
+                <span class="choice-desc">NIH Policy 2017 requires registration and results regardless of ACT status.</span>
+              </span>
+            </button>
+            <button class="choice-btn" onclick="ctgovGo('s1-not-sure')">
+              <span class="choice-icon">❓</span>
+              <span class="choice-text">
+                <span class="choice-label">Not sure if it qualifies as an ACT</span>
+                <span class="choice-desc">Walk through the determination criteria.</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ACT Yes -->
+        <div class="tree-step" id="ctgov-s1-act-yes">
+          <div class="progress-track"><div class="progress-dot done"></div><div class="progress-dot current"></div><div class="progress-dot"></div></div>
+          <div class="breadcrumb"><span>ACT</span></div>
+          <div class="step-header">
+            <span class="step-num">Step 2</span>
+            <div class="step-question">Select the stage</div>
+          </div>
+          <div class="choices">
+            <button class="choice-btn" onclick="ctgovGo('s2-act-register')"><span class="choice-icon">📝</span><span class="choice-text"><span class="choice-label">Registration</span><span class="choice-desc">Timing, required data fields, IND linkage.</span></span></button>
+            <button class="choice-btn" onclick="ctgovGo('s2-act-results')"><span class="choice-icon">📊</span><span class="choice-text"><span class="choice-label">Results Submission</span><span class="choice-desc">Deadlines, PCD definition, adverse events.</span></span></button>
+          </div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctgovBack('s0')">← Back</button><button class="btn-reset" onclick="ctgovReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- ACT Registration -->
+        <div class="tree-step" id="ctgov-s2-act-register">
+          <div class="breadcrumb"><span>ACT</span><span class="sep">›</span><span>Registration</span></div>
+          <div class="outcome-header"><span class="outcome-badge green">Registration — ACT</span></div>
+          <div class="result-box green">
+            <div class="result-title">⏱ Deadline</div>
+            <div class="result-body"><strong>Within 21 days of first participant enrolment</strong> — not first patient screened. Registration must be submitted (not just initiated). (42 CFR §11.28)</div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">📋 Required Data Fields</div>
+            <div class="result-body">
+              <ul>
+                <li>Primary and secondary outcome measures (pre-specified before enrolment)</li>
+                <li>Eligibility criteria (inclusion/exclusion)</li>
+                <li>Study design, phase, and allocation</li>
+                <li>Sponsor and responsible party contact details</li>
+                <li>Recruitment status (must be kept current throughout)</li>
+                <li>Full protocol upload (required for NIH-funded trials)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="result-box amber">
+            <div class="result-title">💊 IND / FDA Note</div>
+            <div class="result-body">IND application to FDA (21 CFR Part 312) is a separate, parallel obligation for unapproved drugs/biologics. CT.gov registration and IND are independent — both may be required.</div>
+          </div>
+          <div class="result-box red">
+            <div class="result-title">💰 Penalty</div>
+            <div class="result-body">Non-compliance: up to <strong>$12,897/day</strong> civil penalty. FDA and NIH have increased enforcement since 2022.</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">FDAAA §801</span><span class="ref-chip">42 CFR §11.28</span><span class="ref-chip">FDA Guidance Jan 2023</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctgovBack('s1-act-yes')">← Back</button><button class="btn-reset" onclick="ctgovReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- ACT Results -->
+        <div class="tree-step" id="ctgov-s2-act-results">
+          <div class="breadcrumb"><span>ACT</span><span class="sep">›</span><span>Results Submission</span></div>
+          <div class="outcome-header"><span class="outcome-badge green">Results — ACT</span></div>
+          <div class="result-box green">
+            <div class="result-title">⏱ Results Deadline</div>
+            <div class="result-body"><strong>Within 12 months of the Primary Completion Date (PCD).</strong><br>PCD = the date the LAST participant is measured for the primary outcome. This is NOT the same as last patient visit or database lock. (42 CFR §11.44)</div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">📊 What to Submit</div>
+            <div class="result-body">Structured results data entered directly into CT.gov results module. Adverse event table mandatory — must include all serious and other AEs meeting reporting thresholds.</div>
+          </div>
+          <div class="result-box amber">
+            <div class="result-title">📋 Certificate of Delay</div>
+            <div class="result-body">Available in limited circumstances (e.g. pending marketing application). Requires certification to FDA/NIH. Does not exempt — delays only.</div>
+          </div>
+          <div class="result-box red">
+            <div class="result-title">🚨 Common PCD Mistake</div>
+            <div class="result-body">Sponsors frequently miscalculate PCD. PCD is the date the last participant is measured for the PRIMARY outcome — not last visit, not database lock.</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">42 CFR §11.44</span><span class="ref-chip">42 U.S.C. §282(j)(5)(A)</span><span class="ref-chip">FDA Guidance Jan 2023</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctgovBack('s1-act-yes')">← Back</button><button class="btn-reset" onclick="ctgovReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Phase I -->
+        <div class="tree-step" id="ctgov-s1-phase1">
+          <div class="breadcrumb"><span>Phase I</span></div>
+          <div class="outcome-header"><span class="outcome-badge amber">Phase I — Generally Exempt</span></div>
+          <div class="result-box amber">
+            <div class="result-title">ℹ️ Phase I Drug Trials</div>
+            <div class="result-body">
+              Phase I drug trials are generally exempt from mandatory ACT registration under FDAAA 801. Voluntary registration is strongly recommended for ICMJE journal publication compliance — register before first enrolment in any WHO ICTRP primary registry.<br><br>
+              <strong>No mandatory results submission</strong> for non-ACT Phase I trials. Voluntary posting recommended.
+            </div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">⚠️ Exceptions</div>
+            <div class="result-body">
+              NIH-funded Phase I trials: mandatory regardless of ACT status (NIH Policy 2017).<br>
+              Device trials: Phase I device trials under IDE may still qualify as ACTs — confirm with regulatory team.
+            </div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">FDAAA §801</span><span class="ref-chip">42 CFR Part 11</span><span class="ref-chip">ICMJE Recommendations</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctgovBack('s0')">← Back</button><button class="btn-reset" onclick="ctgovReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- NIH-funded -->
+        <div class="tree-step" id="ctgov-s1-nih">
+          <div class="breadcrumb"><span>NIH-funded</span></div>
+          <div class="outcome-header"><span class="outcome-badge green">NIH Policy 2017</span></div>
+          <div class="result-box green">
+            <div class="result-title">📋 NIH Policy Requirements</div>
+            <div class="result-body">
+              NIH-funded clinical trials must register and post results in CT.gov regardless of ACT status under the NIH Policy on Dissemination of NIH-Funded Clinical Trial Information (2017).<br><br>
+              <strong>Registration:</strong> before first participant enrolment.<br>
+              <strong>Results:</strong> within 12 months of PCD (same as ACT).<br>
+              <strong>Protocol upload:</strong> required for NIH-funded trials.
+            </div>
+          </div>
+          <div class="result-box neutral">
+            <div class="result-title">ℹ️ Interaction with FDAAA</div>
+            <div class="result-body">NIH Policy applies independently of FDAAA 801. A NIH-funded Phase I trial that is not an ACT still must register and post results under NIH Policy.</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">NIH Policy 2017</span><span class="ref-chip">42 CFR §11.44</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctgovBack('s0')">← Back</button><button class="btn-reset" onclick="ctgovReset()">↺ Start over</button></div>
+        </div>
+
+        <!-- Not sure -->
+        <div class="tree-step" id="ctgov-s1-not-sure">
+          <div class="breadcrumb"><span>ACT Determination</span></div>
+          <div class="outcome-header"><span class="outcome-badge amber">ACT Determination</span></div>
+          <div class="result-box neutral">
+            <div class="result-title">📋 ACT Criteria (all must apply)</div>
+            <div class="result-body">
+              Under FDAAA 801 / 42 CFR §11.10, a study is an ACT if it meets all of the following:<br><br>
+              <ul>
+                <li>It is a clinical investigation of a drug, biologic, or device subject to FDA regulation</li>
+                <li>It has one or more US sites <strong>or</strong> is conducted under FDA IND/IDE</li>
+                <li>It is a controlled trial with one or more arms (or a single-arm device trial)</li>
+                <li>Phase II, III, or IV (drug/biologic) OR any phase for devices under IDE</li>
+              </ul>
+              <br>If all apply → register as ACT. If not → voluntary registration, unless NIH-funded.
+            </div>
+          </div>
+          <div class="result-box amber">
+            <div class="result-title">⚠️ Grey Areas</div>
+            <div class="result-body">Observational studies are generally NOT ACTs. Expanded access protocols are NOT ACTs. When uncertain, voluntary registration is always safe and ICMJE-compliant.</div>
+          </div>
+          <div class="ref-chips"><span class="ref-chip">42 CFR §11.10</span><span class="ref-chip">FDAAA §801</span><span class="ref-chip">FDA ACT Checklist</span></div>
+          <div class="tree-nav"><button class="btn-back" onclick="ctgovBack('s0')">← Back</button><button class="btn-reset" onclick="ctgovReset()">↺ Start over</button></div>
+        </div>
+
+      </div><!-- /tree-container -->
+    </div><!-- /tool-card -->
+  </div><!-- /tool-section -->
+
+
+
+</div><!-- /page-wrap -->
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">Writers' Desk — 2026 &nbsp;·&nbsp; <a href="writers-desk_5.html">Home</a> &nbsp;·&nbsp; <a href="writers-desk-glossary.html">Glossary</a></div>
+    <div class="footer-disclaimer">Practical guidance for clinical trial medical writers. Always verify against current EMA, FDA, and relevant authority documentation before use.</div>
+  </div>
+</footer>
+
+<script>
+  // ── CTIS TREE ──
+  let ctisHistory = [];
+
+  function ctisGo(stepId) {
+    const current = document.querySelector('#ctis-tree-container .tree-step.active');
+    if (current) {
+      ctisHistory.push(current.id.replace('ctis-', ''));
+      current.classList.remove('active');
+    }
+    document.getElementById('ctis-' + stepId).classList.add('active');
+  }
+
+  function ctisBack(stepId) {
+    const current = document.querySelector('#ctis-tree-container .tree-step.active');
+    if (current) current.classList.remove('active');
+    document.getElementById('ctis-' + stepId).classList.add('active');
+  }
+
+  function ctisReset() {
+    document.querySelectorAll('#ctis-tree-container .tree-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('ctis-s0').classList.add('active');
+    ctisHistory = [];
+  }
+
+  // ── CT.GOV TREE ──
+  let ctgovHistory = [];
+
+  function ctgovGo(stepId) {
+    const current = document.querySelector('#ctgov-tree-container .tree-step.active');
+    if (current) {
+      ctgovHistory.push(current.id.replace('ctgov-', ''));
+      current.classList.remove('active');
+    }
+    document.getElementById('ctgov-' + stepId).classList.add('active');
+  }
+
+  function ctgovBack(stepId) {
+    const current = document.querySelector('#ctgov-tree-container .tree-step.active');
+    if (current) current.classList.remove('active');
+    document.getElementById('ctgov-' + stepId).classList.add('active');
+  }
+
+  function ctgovReset() {
+    document.querySelectorAll('#ctgov-tree-container .tree-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('ctgov-s0').classList.add('active');
+    ctgovHistory = [];
+  }
+
+  // ── GLOBAL ROUTING ──
+  function toggleRegion(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.region-toggle');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    toggle.classList.toggle('open', !isOpen);
+  }
+
+  function toggleAcc(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.acc-chevron');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+  }
+</script>
+
+</body>
+</html>
