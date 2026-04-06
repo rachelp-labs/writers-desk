@@ -10,7 +10,8 @@
 
   <style>
     :root {
-      --cream: #FAF7F2;
+      --cream: #F8F5F0;
+      --section-band: #EEE8DC;
       --warm-white: #FFFDF9;
       --parchment: #F0E8D8;
       --parchment-deep: #E8DCC8;
@@ -23,10 +24,11 @@
       --text: #1A1008;
       --text-soft: #4A3828;
       --text-muted: #9C8B75;
-      --card-bg: #FFFFFF;
+      --card-bg: #FAF7F2;
       --card-border: #EDE3D4;
       --accent: #7A6245;
       --accent-light: #B8A88A;
+      --gold: #C9A84C;
       --green: #4A7C59;
       --green-light: #E8F2EC;
       --red: #8B3A3A;
@@ -48,12 +50,13 @@
       color: var(--text);
       line-height: 1.6;
       font-size: 16px;
+      padding-bottom: 3rem;
     }
 
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(250,247,242,0.93);
+      background: rgba(248,245,240,0.93);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border);
       padding: 0 2rem;
@@ -92,7 +95,7 @@
     }
     .hero-sub {
       font-size: 0.95rem; color: var(--text-soft);
-      max-width: 760px; line-height: 1.75; font-weight: 300;
+      line-height: 1.75; font-weight: 300;
     }
 
     /* TOOL SECTIONS */
@@ -100,10 +103,31 @@
       padding: 3.5rem 0;
       border-top: 1px solid var(--card-border);
     }
+    .tool-section-band {
+      background: #F2EDE4;
+      width: calc(100% - 4rem);
+      max-width: 1060px;
+      margin: 0 auto 2rem;
+      border-radius: 16px;
+      border: 1px solid #D4C5A9;
+      box-shadow: 0 2px 16px rgba(62,44,26,0.07);
+    }
+    .tool-section-band-inner {
+      padding: 3.5rem 2.5rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero > * { animation: fadeUp 0.55s ease both; }
+    .hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero > *:nth-child(2) { animation-delay: 0.18s; }
     .section-label {
       font-family: 'DM Mono', monospace; font-size: 0.68rem;
       letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--accent-light); margin-bottom: 0.5rem;
+      color: var(--gold); margin-bottom: 0.5rem;
     }
     .section-title {
       font-family: 'Cormorant Garamond', serif;
@@ -113,14 +137,14 @@
     }
     .section-intro {
       color: var(--text-soft); font-size: 0.88rem; font-weight: 300;
-      max-width: 820px; line-height: 1.7; margin-bottom: 2rem;
+      line-height: 1.7; margin-bottom: 2rem;
     }
 
     /* TOOL CARD WRAPPER */
     .tool-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-top: 2px solid var(--tan-dark);
+      border-top: 2px solid var(--gold);
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
       overflow: hidden;
@@ -191,27 +215,21 @@
     /* RESULT BOXES */
     .result-box {
       border-radius: var(--radius-sm); padding: 1.25rem 1.4rem;
-      margin-bottom: 1rem; border-left: 3px solid;
+      margin-bottom: 1rem; border-left: 3px solid var(--gold);
+      background: var(--parchment);
     }
-    .result-box.green {
-      background: var(--green-light); border-color: var(--green);
-    }
-    .result-box.red {
-      background: var(--red-light); border-color: var(--red);
-    }
-    .result-box.amber {
-      background: var(--amber-light); border-color: var(--amber);
-    }
-    .result-box.neutral {
-      background: var(--parchment); border-color: var(--tan-dark);
-    }
+    .result-box.green { background: var(--parchment); border-color: var(--gold); }
+    .result-box.red   { background: var(--parchment); border-color: var(--gold); }
+    .result-box.amber { background: var(--parchment); border-color: var(--gold); }
+    .result-box.neutral { background: var(--parchment); border-color: var(--gold); }
     .result-title {
       font-weight: 500; font-size: 0.88rem;
       margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem;
+      color: var(--brown-dark);
     }
-    .result-box.green .result-title { color: var(--green); }
-    .result-box.red .result-title { color: var(--red); }
-    .result-box.amber .result-title { color: var(--amber); }
+    .result-box.green .result-title  { color: var(--brown-dark); }
+    .result-box.red .result-title    { color: var(--brown-dark); }
+    .result-box.amber .result-title  { color: var(--brown-dark); }
     .result-box.neutral .result-title { color: var(--brown-dark); }
     .result-body {
       font-size: 0.83rem; font-weight: 300; color: var(--text-soft);
@@ -232,12 +250,12 @@
 
     /* WARNING BOXES */
     .warn-box {
-      background: var(--amber-light); border: 1px solid #D4A843;
+      background: var(--parchment); border: 1px solid var(--tan-dark);
       border-radius: var(--radius-sm); padding: 0.85rem 1rem;
       margin-bottom: 1rem; font-size: 0.82rem;
       color: var(--text-soft); line-height: 1.55;
     }
-    .warn-box strong { color: var(--amber); }
+    .warn-box strong { color: var(--brown-dark); }
 
     /* PROGRESS BAR */
     .progress-track {
@@ -286,9 +304,9 @@
       letter-spacing: 0.1em; text-transform: uppercase;
       padding: 0.25rem 0.7rem; border-radius: 20px;
     }
-    .outcome-badge.green { background: var(--green-light); color: var(--green); }
-    .outcome-badge.amber { background: var(--amber-light); color: var(--amber); }
-    .outcome-badge.red { background: var(--red-light); color: var(--red); }
+    .outcome-badge.green { background: var(--parchment); color: var(--brown-mid); }
+    .outcome-badge.amber { background: var(--parchment); color: var(--brown-mid); }
+    .outcome-badge.red   { background: var(--parchment); color: var(--brown-mid); }
 
     /* ── GLOBAL ROUTING TOOL ── */
     .routing-grid {
@@ -345,12 +363,12 @@
     .acc-body p:last-child { margin-bottom: 0; }
     .acc-body strong { font-weight: 500; color: var(--text); }
     .watchout {
-      background: var(--amber-light); border-left: 2px solid var(--amber);
+      background: var(--parchment); border-left: 2px solid var(--tan-dark);
       padding: 0.5rem 0.75rem; border-radius: 4px;
       margin-top: 0.5rem; font-size: 0.8rem;
       color: var(--text-soft);
     }
-    .watchout strong { color: var(--amber); }
+    .watchout strong { color: var(--brown-dark); }
 
     /* mandatory badge */
     .mandatory-tag {
@@ -358,27 +376,18 @@
       letter-spacing: 0.06em; padding: 0.15rem 0.5rem;
       border-radius: 3px; margin-left: 0.5rem;
     }
-    .mandatory-tag.yes { background: var(--green-light); color: var(--green); }
-    .mandatory-tag.conditional { background: var(--amber-light); color: var(--amber); }
+    .mandatory-tag.yes { background: var(--parchment); color: var(--brown-mid); }
+    .mandatory-tag.conditional { background: var(--parchment); color: var(--brown-light); }
 
     /* FOOTER */
-    footer {
-      border-top: 1px solid var(--card-border);
-      padding: 2rem 0; margin-top: 3rem;
-    }
+    footer { padding: 2rem; border-top: 1px solid var(--card-border); margin-top: 1rem; }
     .footer-inner {
-      max-width: 1060px; margin: 0 auto; padding: 0 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
+      max-width: 1060px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
     }
-    .footer-text {
-      font-size: 0.78rem; color: var(--text-muted); font-weight: 300;
-    }
-    .footer-text a { color: var(--accent); text-decoration: none; }
-    .footer-disclaimer {
-      font-size: 0.73rem; color: var(--text-muted); font-weight: 300;
-      max-width: 560px; line-height: 1.55; text-align: right;
-    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--brown-dark); letter-spacing: 0.01em; }
+    .footer-note { font-size: 0.75rem; color: var(--text-muted); font-weight: 300; }
 
     /* RESPONSIVE */
     @media (max-width: 640px) {
@@ -407,11 +416,13 @@
     <h1><em>Interactive</em> decision trees</h1>
     <p class="hero-sub">Interactive reference tools for clinical trial registration, submission, and disclosure. Select your scenario and follow the branch — each tool surfaces the relevant requirements, deadlines, and watchouts for your situation.</p>
   </div>
+</div>
 
   <!-- ═══════════════════════════════════════════
        TOOL 1: CTIS SUBMISSION DECISION TREE
   ═══════════════════════════════════════════ -->
-  <div class="tool-section" id="ctis-tree">
+  <div class="tool-section-band" id="ctis-tree">
+  <div class="tool-section-band-inner">
     <p class="section-label">Tool 01</p>
     <p class="section-title">CTIS Submission Decision Tree</p>
     <p class="section-intro">Navigate CTIS document selection, publication rules, and submission requirements by trial phase and lifecycle stage. Based on EU CTR 536/2014 and EMA/298962/2024.</p>
@@ -855,13 +866,15 @@
 
       </div><!-- /tree-container -->
     </div><!-- /tool-card -->
-  </div><!-- /tool-section -->
+  </div><!-- /tool-section-band-inner -->
+  </div><!-- /tool-section-band Tool 01 -->
 
 
   <!-- ═══════════════════════════════════════════
        TOOL 2: CT.GOV DECISION TREE
   ═══════════════════════════════════════════ -->
-  <div class="tool-section" id="ctgov-tree">
+  <div class="tool-section-band" id="ctgov-tree">
+  <div class="tool-section-band-inner">
     <p class="section-label">Tool 02</p>
     <p class="section-title">ClinicalTrials.gov Decision Tree</p>
     <p class="section-intro">Determine registration and results submission obligations for US-based or FDA-regulated trials under FDAAA 801 / 42 CFR Part 11. Covers both Applicable Clinical Trials (ACTs) and NIH-funded studies.</p>
@@ -1056,17 +1069,14 @@
 
       </div><!-- /tree-container -->
     </div><!-- /tool-card -->
-  </div><!-- /tool-section -->
-
-
-
-</div><!-- /page-wrap -->
+  </div><!-- /tool-section-band-inner -->
+  </div><!-- /tool-section-band Tool 02 -->
 
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-text">Writers' Desk — 2026 &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="writers-desk-glossary.html">Glossary</a></div>
-    <div class="footer-disclaimer">Practical guidance for clinical trial medical writers. Always verify against current EMA, FDA, and relevant authority documentation before use.</div>
+    <span class="footer-logo">Writers' Desk</span>
+    <p class="footer-note">Practical guidance for medical writers. 2026.</p>
   </div>
 </footer>
 

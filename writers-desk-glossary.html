@@ -10,7 +10,8 @@
 
   <style>
     :root {
-      --cream: #FAF7F2;
+      --cream: #F8F5F0;
+      --section-band: #EEE8DC;
       --warm-white: #FFFDF9;
       --parchment: #F0E8D8;
       --parchment-deep: #E8DCC8;
@@ -23,10 +24,11 @@
       --text: #1A1008;
       --text-soft: #4A3828;
       --text-muted: #9C8B75;
-      --card-bg: #FFFFFF;
+      --card-bg: #FAF7F2;
       --card-border: #EDE3D4;
       --accent: #7A6245;
       --accent-light: #B8A88A;
+      --gold: #C9A84C;
       --shadow-sm: 0 1px 4px rgba(62,44,26,0.08);
       --shadow-md: 0 4px 18px rgba(62,44,26,0.11);
       --radius: 12px;
@@ -42,12 +44,13 @@
       color: var(--text);
       line-height: 1.6;
       font-size: 16px;
+      padding-bottom: 3rem;
     }
 
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(250,247,242,0.93);
+      background: rgba(248,245,240,0.93);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border);
       padding: 0 2rem;
@@ -89,15 +92,27 @@
     }
     .hero-sub {
       font-size: 1rem; color: var(--text-soft);
-      max-width: 760px; line-height: 1.75; font-weight: 300;
+      line-height: 1.75; font-weight: 300;
     }
 
     /* SECTION */
     .section { padding: 3rem 0; border-top: 1px solid var(--card-border); }
+    .section-band {
+      background: #F2EDE4;
+      width: calc(100% - 4rem);
+      max-width: 1060px;
+      margin: 0 auto 2rem;
+      border-radius: 16px;
+      border: 1px solid #D4C5A9;
+      box-shadow: 0 2px 16px rgba(62,44,26,0.07);
+    }
+    .section-band-inner {
+      padding: 3rem 2.5rem;
+    }
     .section-label {
       font-family: 'DM Mono', monospace; font-size: 0.68rem;
       letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--accent-light); margin-bottom: 0.6rem;
+      color: var(--gold); margin-bottom: 0.6rem;
     }
 
     /* SEARCH + FILTER BAR */
@@ -165,6 +180,7 @@
       display: flex; flex-direction: column; gap: 1px;
       background: var(--card-border);
       border: 1px solid var(--card-border);
+      border-top: 2px solid var(--gold);
       border-radius: var(--radius); overflow: hidden;
       box-shadow: var(--shadow-sm);
     }
@@ -229,8 +245,8 @@
       border: 1px solid var(--card-border);
       color: var(--text-muted); background: var(--cream);
     }
-    .tag.eu { border-color: #C5BAA8; color: #5C4A32; background: #F5F0E8; }
-    .tag.us { border-color: #B8C5C8; color: #2A4A52; background: #EEF3F5; }
+    .tag.eu { border-color: #A8C4A8; color: #2A4A2A; background: #EEF5EE; }
+    .tag.us { border-color: #A8B8C8; color: #1E3A4A; background: #EBF0F5; }
     .tag.all { border-color: var(--tan); color: var(--brown-mid); background: var(--parchment); }
 
     /* NO RESULTS */
@@ -298,13 +314,14 @@
 </nav>
 
 <div class="page-wrap">
-
   <div class="hero">
     <h1>Terms & <em>definitions.</em></h1>
     <p class="hero-sub">A reference glossary for clinical trial registration and disclosure — covering EU/CTIS and US/ClinicalTrials.gov terminology used by medical writers and sponsors.</p>
   </div>
+</div>
 
-  <div class="section">
+<div class="section-band">
+  <div class="section-band-inner">
     <p class="section-label">Glossary</p>
 
     <div class="controls">
@@ -327,9 +344,8 @@
 
     <div class="result-meta" id="result-meta"></div>
     <div class="glossary-list" id="glossary-list"></div>
-  </div>
-
-</div>
+  </div><!-- /section-band-inner -->
+</div><!-- /section-band -->
 
 <footer>
   <div class="footer-inner">
