@@ -148,12 +148,23 @@
     }
     .section-link:hover { color: var(--brown-dark); border-color: var(--brown-dark); }
 
-    /* SNAPSHOT GRID — two columns side by side */
+    /* SNAPSHOT GRID — stacked, one card per row */
     .snapshot-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 1.25rem;
       margin-bottom: 1.25rem;
+    }
+    .snap-note {
+      font-size: 0.75rem; color: var(--text-muted); font-weight: 300;
+      font-style: italic; padding: 0.3rem 0.6rem; margin: 0.25rem 0 0.1rem;
+      border-left: 2px solid var(--tan);
+    }
+    .snap-warn {
+      font-size: 0.75rem; color: var(--amber); font-weight: 400;
+      padding: 0.3rem 0.6rem; margin: 0.3rem 0 0.1rem;
+      border-left: 2px solid var(--amber); background: var(--amber-light);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     }
 
     .snap-card {
@@ -337,29 +348,63 @@
 
     <div class="snapshot-grid">
 
-      <!-- EU -->
-      <div class="snap-card">
-        <div class="snap-card-title">EU / EEA — CTIS</div>
+      <!-- EU — split layout -->
+      <div class="snap-card" style="padding:0; overflow:hidden;">
 
-        <div class="qr-section-head" style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);margin:1rem 0 0.4rem;">Registration</div>
-        <div class="snap-row"><span class="snap-label">System</span><span class="snap-value"><strong>CTIS — euclinicaltrials.eu</strong></span></div>
-        <div class="snap-row"><span class="snap-label">Regulation</span><span class="snap-value">EU CTR No 536/2014</span></div>
-        <div class="snap-row"><span class="snap-label">Mandatory</span><span class="snap-value"><strong>Yes — all phases, no exemptions</strong></span></div>
-        <div class="snap-row"><span class="snap-label">In force</span><span class="snap-value">31 Jan 2022 (new trials); EudraCT closed 30 Jan 2025</span></div>
-        <div class="snap-row"><span class="snap-label">Register by</span><span class="snap-value">Before trial start — CTA submission</span></div>
-        <div class="snap-row"><span class="snap-label">RFI response</span><span class="snap-value">10 days (validation); 12 days (assessment) — no email alerts</span></div>
+        <!-- Title spans full width -->
+        <div style="padding:1.4rem 1.4rem 0.6rem; border-bottom:1px solid var(--parchment-deep);">
+          <div class="snap-card-title" style="margin-bottom:0; border-bottom:none; padding-bottom:0;">EU / EEA — CTIS</div>
+        </div>
 
-        <div class="qr-section-head" style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);margin:1rem 0 0.4rem;">Results Posting</div>
-        <div class="snap-row"><span class="snap-label">CSR deadline</span><span class="snap-value"><strong>30 days from EoT — all categories</strong></span></div>
-        <div class="snap-row"><span class="snap-label">Lay summary</span><span class="snap-value">12 months (6 months if paediatric)</span></div>
-        <div class="snap-row"><span class="snap-label">Phase exemptions</span><span class="snap-value">None — Cat. 1, 2, and 3 all required</span></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; align-items:start;">
 
-        <div class="qr-section-head" style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);margin:1rem 0 0.4rem;">Key Watchouts</div>
-        <div class="snap-row"><span class="snap-label">IB placement</span><span class="snap-value">Never in SmPC slot — publishes automatically</span></div>
-        <div class="snap-row"><span class="snap-label">UK sites</span><span class="snap-value">Always require separate MHRA CTA</span></div>
+          <!-- Left: Registration + Results Posting -->
+          <div style="padding:1rem 1.4rem 1.2rem; border-right:1px solid var(--parchment-deep);">
 
-        <div class="snap-footer">
-          <a href="tools.html#ctis-tree" class="section-link">Full CTIS tools →</a>
+            <div class="qr-section-head" style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);margin:0.75rem 0 0.4rem;">Registration</div>
+            <div class="snap-row"><span class="snap-label">System</span><span class="snap-value"><strong>CTIS — euclinicaltrials.eu</strong></span></div>
+            <div class="snap-row"><span class="snap-label">Regulation</span><span class="snap-value">Regulation (EU) No 536/2014 (CTR)</span></div>
+            <div class="snap-row"><span class="snap-label">Mandatory</span><span class="snap-value"><strong>Mandatory for interventional clinical trials on medicinal products conducted under the EU CTR in the EU / EEA</strong></span></div>
+            <div class="snap-row"><span class="snap-label">In force</span><span class="snap-value">CTIS live from 31 Jan 2022; from 31 Jan 2025 all continuing or new EU / EEA IMP trials must be under the CTR / CTIS framework</span></div>
+            <div class="snap-row"><span class="snap-label">Apply by</span><span class="snap-value">CTA must be submitted and authorised before trial start</span></div>
+            <div class="snap-row"><span class="snap-label">Categories</span><span class="snap-value">Cat. 1: Phase I / pharmaceutical development · Cat. 2: Phase I/II integrated, Phase II, Phase III · Cat. 3: Phase III–IV integrated, Phase IV, low-interventional</span></div>
+
+            <div class="qr-section-head" style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);margin:0.75rem 0 0.4rem;">Results posting</div>
+            <div class="snap-row"><span class="snap-label">Summary of results</span><span class="snap-value"><strong>Within 12 months from end of trial in all EU / EEA Member States concerned — all categories, no exemptions</strong></span></div>
+            <div class="snap-row"><span class="snap-label">Lay summary</span><span class="snap-value">12 months from end of trial; 6 months for paediatric trials and/or trials in a PIP context</span></div>
+            <div class="snap-row"><span class="snap-label">CSR<sup style="font-size:0.6rem; color:var(--text-muted); margin-left:1px;">3</sup></span><span class="snap-value">Only where the trial was intended to support an MAA in the EU / EEA. Due within 30 days after the MA is granted, the procedure is completed, or the MAA is withdrawn</span></div>
+          </div>
+
+          <!-- Right: Assessment timelines + Transparency + Key watchouts -->
+          <div style="padding:1rem 1.4rem 1.2rem;">
+
+            <div class="qr-section-head" style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);margin:0.75rem 0 0.4rem;">Assessment timelines</div>
+            <div class="snap-row"><span class="snap-label">Validation</span><span class="snap-value">Up to 10 days</span></div>
+            <div class="snap-row"><span class="snap-label">Assessment Part I</span><span class="snap-value">45 days (30 days for low-interventional trials)</span></div>
+            <div class="snap-row"><span class="snap-label">Assessment Part II</span><span class="snap-value">Per MSC — runs in parallel with Part I</span></div>
+            <div class="snap-row"><span class="snap-label">RFI response<sup style="font-size:0.6rem; color:var(--text-muted); margin-left:1px;">1</sup></span><span class="snap-value">Up to 10 days (validation); up to 12 days (assessment)</span></div>
+
+            <div class="qr-section-head" style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);margin:0.75rem 0 0.4rem;">Transparency / public disclosure</div>
+            <div class="snap-row"><span class="snap-label">Cat. 2 &amp; 3 trigger</span><span class="snap-value">First MSC decision on the CTA</span></div>
+            <div class="snap-row"><span class="snap-label">Cat. 2 &amp; 3 documents</span><span class="snap-value">Protocol, synopsis, patient-facing documents, SmPC (if available), ICF/PIS, recruitment arrangements</span></div>
+            <div class="snap-row"><span class="snap-label">Cat. 1 adults</span><span class="snap-value">Protocol / synopsis / patient-facing documents publish 30 months after EU / EEA end of trial</span></div>
+            <div class="snap-row"><span class="snap-label">Cat. 1 paediatric / PIP</span><span class="snap-value">Protocol / synopsis / patient-facing documents publish with final summary results when submitted in CTIS</span></div>
+            <div class="snap-row"><span class="snap-label">Published version</span><span class="snap-value">Only the latest post-decision version is published; superseded RFI-response versions are not published</span></div>
+
+            <div class="qr-section-head" style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-light);margin:0.75rem 0 0.4rem;">Key watchouts</div>
+            <div class="snap-row"><span class="snap-label">SUSARs<sup style="font-size:0.6rem; color:var(--text-muted); margin-left:1px;">2</sup></span><span class="snap-value">Submit exclusively via EudraVigilance — fatal/life-threatening 7 days; all other 15 days. Never via CTIS.</span></div>
+            <div class="snap-row"><span class="snap-label">Grandfathered trials</span><span class="snap-value">Trials authorised under EudraCT before the transition deadline remain on EudraCT only</span></div>
+            <div class="snap-row"><span class="snap-label">PIP / Art. 46</span><span class="snap-value">PIP trials with EU/EEA sites: register in CTIS and attach PDCO opinion. PIP/Art. 46 trials exclusively outside EEA: register in EudraCT Third Country File — not CTIS</span></div>
+          </div>
+
+        </div>
+
+        <!-- Full-width footnote strip -->
+        <div style="border-top:1px solid var(--parchment-deep); padding:0.5rem 1.4rem 0.7rem; display:flex; flex-direction:column; gap:0.15rem;">
+          <p style="font-size:0.71rem; color:var(--text-muted); font-weight:300; line-height:1.45; margin:0;"><sup style="font-size:0.6rem;">1</sup> CTIS does not send automatic RFI email notifications. Monitor Notices &amp; alerts in the sponsor workspace after every submission.</p>
+          <p style="font-size:0.71rem; color:var(--text-muted); font-weight:300; line-height:1.45; margin:0;"><sup style="font-size:0.6rem;">2</sup> SUSARs must never be submitted via CTIS. EudraVigilance is the only submission route.</p>
+          <p style="font-size:0.71rem; color:var(--text-muted); font-weight:300; line-height:1.45; margin:0;"><sup style="font-size:0.6rem;">3</sup> The CSR deadline is tied to the MA outcome, not to the EoT notification. Trials not intended to support an MAA do not require a CSR submission in CTIS.</p>
+          <div style="text-align:right; margin-top:0.45rem;"><a href="tools.html#ctis-tree" class="section-link">Full CTIS tools →</a></div>
         </div>
       </div>
 
