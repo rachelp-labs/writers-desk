@@ -10,27 +10,27 @@
 
   <style>
     :root {
-      --cream: #FBF8F4;
-      --section-band: #EEE8DC;
-      --warm-white: #FFFDF9;
-      --parchment: #F0E8D8;
-      --parchment-deep: #E8DCC8;
-      --tan: #D4C5A9;
-      --tan-dark: #B8A88A;
-      --brown: #7A6245;
-      --brown-dark: #3E2C1A;
-      --brown-mid: #5C4A32;
-      --brown-light: #9C8B75;
-      --text: #1A1008;
-      --text-soft: #4A3828;
-      --text-muted: #9C8B75;
-      --card-bg: #FDFAF6;
-      --card-border: #F0E8DA;
-      --accent: #7A6245;
-      --accent-light: #B8A88A;
-      --gold: #C9A84C;
-      --shadow-sm: 0 1px 4px rgba(62,44,26,0.08);
-      --shadow-md: 0 4px 18px rgba(62,44,26,0.11);
+      --cream: #FAF7F2;
+      --section-band: #FAF7F2;
+      --warm-white: #FFFFFF;
+      --parchment: #F0EDE7;
+      --parchment-deep: #E8E3D9;
+      --tan: #D9D2C5;
+      --tan-dark: #C4BAA8;
+      --brown: #2D6A6C;
+      --brown-dark: #1A1A1A;
+      --brown-mid: #2D6A6C;
+      --brown-light: #4A8A8C;
+      --text: #1A1A1A;
+      --text-soft: #3D3D3D;
+      --text-muted: #7A7A7A;
+      --card-bg: #FFFFFF;
+      --card-border: #E8E3D9;
+      --accent: #2D6A6C;
+      --accent-light: #E4F0F0;
+      --gold: #2D6A6C;
+      --shadow-sm: 0 1px 4px rgba(26,26,26,0.07);
+      --shadow-md: 0 4px 18px rgba(26,26,26,0.10);
       --radius: 12px;
       --radius-sm: 8px;
     }
@@ -40,7 +40,7 @@
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
+      background: #FFFFFF;
       color: var(--text);
       line-height: 1.6;
       font-size: 16px;
@@ -50,7 +50,7 @@
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(251,248,244,0.93);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border);
       padding: 0 2rem;
@@ -95,16 +95,38 @@
       line-height: 1.75; font-weight: 300;
     }
 
+    /* HERO BANNER */
+    .hero-banner { background: #FAF7F2; padding: 2rem 0; }
+    .hero-card {
+      background: #FFFFFF;
+      border: 1px solid #E8E3D9;
+      border-radius: 16px;
+      padding: 2.5rem 2.5rem 2.25rem;
+      box-shadow: var(--shadow-md);
+      width: calc(100% - 4rem);
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+    .hero-card h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400; line-height: 1.15;
+      color: #1A1A1A; letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    .hero-card h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+    .hero-card .hero-sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.75; font-weight: 300; }
+
     /* SECTION */
     .section { padding: 3rem 0; border-top: 1px solid var(--card-border); }
     .section-band {
-      background: #F7F3EC;
+      background: #FAF7F2;
       width: calc(100% - 4rem);
       max-width: 1060px;
       margin: 0 auto 2rem;
       border-radius: 16px;
-      border: 1px solid #D4C5A9;
-      box-shadow: 0 4px 24px rgba(62,44,26,0.13), 0 1px 4px rgba(62,44,26,0.08);
+      border: 1px solid #E8E3D9;
+      box-shadow: 0 4px 24px rgba(26,26,26,0.10), 0 1px 4px rgba(26,26,26,0.07);
     }
     .section-band-inner {
       padding: 3rem 2.5rem;
@@ -152,7 +174,7 @@
       cursor: pointer; transition: all 0.15s;
     }
     .alpha-btn:hover { background: var(--parchment); color: var(--brown-dark); border-color: var(--tan); }
-    .alpha-btn.active { background: var(--brown-dark); color: white; border-color: var(--brown-dark); }
+    .alpha-btn.active { background: #1A1A1A; color: white; border-color: #1A1A1A; }
     .alpha-btn.has-terms { color: var(--brown-mid); border-color: var(--tan); }
     .alpha-btn.no-terms { opacity: 0.35; cursor: default; pointer-events: none; }
 
@@ -173,7 +195,7 @@
       cursor: pointer; transition: all 0.15s;
     }
     .region-btn:hover { border-color: var(--tan); color: var(--brown-mid); }
-    .region-btn.active { background: var(--brown-dark); color: white; border-color: var(--brown-dark); }
+    .region-btn.active { background: #1A1A1A; color: white; border-color: #1A1A1A; }
 
     /* GLOSSARY LIST */
     .glossary-list {
@@ -268,7 +290,7 @@
 
     /* HIGHLIGHT */
     mark {
-      background: #F5E8C0; color: var(--brown-dark);
+      background: #D4EBEB; color: #1A1A1A;
       border-radius: 2px; padding: 0 1px;
     }
 
@@ -314,14 +336,14 @@
   </div>
 </nav>
 
-<div class="page-wrap">
-  <div class="hero">
+<div class="hero-banner">
+  <div class="hero-card">
     <h1>Terms & <em>definitions.</em></h1>
     <p class="hero-sub">A reference glossary for clinical trial registration and disclosure — covering EU/CTIS and US/ClinicalTrials.gov terminology used by medical writers and sponsors.</p>
   </div>
 </div>
 
-<div class="section-band">
+<div class="section-band" style="margin-top: 2rem;">
   <div class="section-band-inner">
     <p class="section-label">Glossary</p>
 
@@ -361,7 +383,7 @@ const TERMS = [
     abbr: "ACT",
     name: "Applicable Clinical Trial",
     regions: ["US"],
-    definition: "A clinical trial subject to mandatory ClinicalTrials.gov registration under FDAAA 801. Generally covers Phase II–IV drug, biologic, or device trials with US sites or conducted under an FDA IND/IDE."
+    definition: "A clinical trial subject to mandatory ClinicalTrials.gov registration and results reporting under FDAAA 801 / 42 CFR Part 11. For drugs/biologics: an interventional study, phase other than Phase I, of an FDA-regulated product with a US nexus. For devices: a prospective controlled study of health outcomes of an FDA-regulated device with a US nexus, excluding small feasibility studies. See 42 CFR §11.22(b)."
   },
   {
     abbr: "Art. 46 Study",
@@ -391,13 +413,13 @@ const TERMS = [
     abbr: "CAT",
     name: "Category (Publication)",
     regions: ["EU"],
-    definition: "The publication category assigned to a clinical trial under EU CTR 536/2014. Category 1 = first-in-human/healthy volunteers (limited publication); Category 2 = mixed/bridging trials (extended publication); Category 3 = pivotal/post-authorisation trials (full publication)."
+    definition: "The publication category assigned to a clinical trial under EU CTR 536/2014, which determines publication timelines and obligations. Category 1 = pharmaceutical development trials (Phase I in healthy volunteers or patients, Phase 0, bioequivalence/bioavailability, biosimilarity, and equivalence trials). Category 2 = therapeutic exploratory and confirmatory trials (Phase I/II integrated, Phase II, Phase III). Category 3 = therapeutic use trials (Phase III/IV integrated, Phase IV, and low-interventional trials)."
   },
   {
     abbr: "CCI",
     name: "Commercially Confidential Information",
     regions: ["EU"],
-    definition: "Data or information that, if disclosed, could harm the commercial interests of the sponsor. Must be redacted from published CTIS documents. Cannot be entered into CTIS structured data fields as these cannot be redacted post-submission."
+    definition: "Data or information that, if disclosed, could harm the commercial interests of the sponsor. Must be redacted from published CTIS documents. Structured data fields subject to publication cannot be redacted once submitted, so CCI must not be entered into those fields."
   },
   {
     abbr: "CHMP",
@@ -415,7 +437,7 @@ const TERMS = [
     abbr: "CSR",
     name: "Clinical Study Report",
     regions: ["EU", "US"],
-    definition: "The full structured report of a clinical trial's methods, results, and conclusions, prepared in accordance with ICH E3. Published in CTIS for all categories within 30 days of end-of-trial notification. Two versions required in the EU: unredacted and redacted for publication."
+    definition: "The full structured report of a clinical trial's methods, results, and conclusions, prepared in accordance with ICH E3. In the EU, required only when the trial is intended to support an MAA — due within 30 days after the MA is granted, the procedure is completed, or the MAA is withdrawn. Two versions required: unredacted and redacted for publication."
   },
   {
     abbr: "CTA",
@@ -433,7 +455,7 @@ const TERMS = [
     abbr: "CTIS",
     name: "Clinical Trial Information System",
     regions: ["EU"],
-    definition: "The EMA's centralised EU portal for submitting, managing, and publishing clinical trial information. Single submission via CTIS covers all Member States Concerned. Became the mandatory entry point on 31 January 2023."
+    definition: "The EMA's centralised EU portal for submitting, managing, and publishing clinical trial information. Single submission via CTIS covers all Member States Concerned. Became the mandatory entry point on 31 January 2022."
   },
   {
     abbr: "EMA",
@@ -442,16 +464,10 @@ const TERMS = [
     definition: "The EU regulatory agency responsible for the scientific evaluation, supervision, and safety monitoring of medicines. Operates CTIS and houses scientific committees including CHMP, PDCO, and PRAC."
   },
   {
-    abbr: "ENCePP",
-    name: "European Network of Centres for Pharmacoepidemiology and Pharmacovigilance",
-    regions: ["EU"],
-    definition: "EMA network that hosts the EU PAS Register. Registration of all PASS (interventional and non-interventional) in the EU PAS Register at ENCePP is mandatory before study start."
-  },
-  {
     abbr: "EoT",
     name: "End of Trial",
     regions: ["EU"],
-    definition: "The formal notification submitted via CTIS within 15 days of trial completion in the last Member State. Triggers results posting deadlines: CSR within 30 days, lay summary within 12 months."
+    definition: "The formal notification submitted via CTIS within 15 days of trial completion in the last Member State. Triggers results posting deadlines: summary of results within 12 months, lay summary within 12 months (6 months if the trial includes a paediatric population)."
   },
   {
     abbr: "EPAR",
@@ -523,7 +539,7 @@ const TERMS = [
     abbr: "IMPD",
     name: "Investigational Medicinal Product Dossier",
     regions: ["EU"],
-    definition: "The dossier containing quality, safety, and efficacy data on the IMP. NOT published under revised June 2024 transparency rules. Full IMPD required for non-authorised IMPs; Simplified IMPD acceptable when the IMP holds a current EU Marketing Authorisation."
+    definition: "The dossier containing quality, safety, and efficacy data on the IMP. NOT published under the Revised CTIS Transparency Rules. Full IMPD required for non-authorised IMPs; Simplified IMPD acceptable when the IMP holds a current EU Marketing Authorisation."
   },
   {
     abbr: "IND",
@@ -580,16 +596,10 @@ const TERMS = [
     definition: "The EMA system for registering sponsor organisations before accessing CTIS. OMS registration is a prerequisite for CTIS access. Each organisation must be registered and users assigned appropriate roles (CT Admin, Part I Preparer, Part II Submitter)."
   },
   {
-    abbr: "PASS",
-    name: "Post-Authorisation Safety Study",
-    regions: ["EU"],
-    definition: "A study to evaluate the safety of an authorised medicine in real-world conditions. Interventional PASS: registered in both CTIS and EU PAS Register (ENCePP). Non-interventional PASS: ENCePP only, not CTIS. PRAC-imposed PASS requires a PRAC Protocol Opinion before initiating."
-  },
-  {
     abbr: "PCD",
     name: "Primary Completion Date",
     regions: ["US"],
-    definition: "The date on which the last participant is measured for the primary outcome measure. Triggers the 12-month results submission deadline on ClinicalTrials.gov. NOT the same as last patient visit, last patient out, or database lock date."
+    definition: "The date the final participant was examined or received an intervention for final collection of data for the primary outcome. Triggers the 12-month results submission deadline on ClinicalTrials.gov. NOT the same as last patient visit, last patient out, or database lock date. See 42 CFR §11.10."
   },
   {
     abbr: "PDCO",
@@ -604,22 +614,10 @@ const TERMS = [
     definition: "An EMA-agreed plan for developing a medicine in children. Required for new marketing authorisation applications. For trials with EU/EEA sites: register in CTIS and attach PDCO opinion. For trials exclusively outside the EEA: register in EudraCT Third Country File, not CTIS."
   },
   {
-    abbr: "PRAC",
-    name: "Pharmacovigilance Risk Assessment Committee",
-    regions: ["EU"],
-    definition: "The EMA committee overseeing the safety of authorised medicines. Oversees imposed PASS, issues Protocol Opinions before PRAC-imposed PASS begin, and evaluates PASS final study reports."
-  },
-  {
     abbr: "RFI",
     name: "Request for Information",
     regions: ["EU"],
     definition: "A formal question raised by the RMS or an MSC during CTIS validation or assessment. Strict response deadlines: validation RFI = 10 days; assessment RFI = 12 days. Non-response causes the application to lapse automatically. CTIS sends no email alerts — the portal must be checked daily."
-  },
-  {
-    abbr: "RMP",
-    name: "Risk Management Plan",
-    regions: ["EU"],
-    definition: "A document describing the safety profile of a medicine and how risks are managed. Part III covers the pharmacovigilance plan including PASS categorisation. An RMP extract (Part III only) is submitted in CTIS for PRAC-imposed PASS."
   },
   {
     abbr: "RMS",
@@ -628,10 +626,16 @@ const TERMS = [
     definition: "The lead Member State responsible for coordinating and concluding the Part I assessment in a multinational CTIS submission. Sponsor proposes the RMS; for single-nation trials the sole MS is RMS by default."
   },
   {
+    abbr: "Responsible Party",
+    name: "Responsible Party",
+    regions: ["US"],
+    definition: "The entity or individual legally accountable for ClinicalTrials.gov registration and results submissions under 42 CFR Part 11. May be the sponsor of the clinical trial, the sponsor-investigator, or a principal investigator designated by the sponsor who has access and control over all trial data. The responsible party's official title must be submitted as a required data element at registration."
+  },
+  {
     abbr: "SM",
     name: "Substantial Modification",
     regions: ["EU"],
-    definition: "A change to a clinical trial that significantly impacts participant safety, scientific validity, or data reliability. Requires formal CTIS authorisation. Protocol amendments submitted as part of an SM must include a clean version (for publication) and a track-changes version (for MSC review only — never uploaded to the for-publication slot)."
+    definition: "A change to a clinical trial that significantly impacts participant safety, scientific validity, or data reliability. Requires formal CTIS authorisation. Protocol amendments submitted as part of an SM must include a clean version (for publication) and a track-changes version for MSC review — the track-changes version must only be uploaded to the not-for-publication slot, never to a public-facing slot."
   },
   {
     abbr: "SmPC",
@@ -656,6 +660,12 @@ const TERMS = [
     name: "WHO International Clinical Trials Registry Platform",
     regions: ["EU", "US"],
     definition: "The WHO platform recognising qualified primary registries that meet specific criteria for transparency and public access. CT.gov and CTIS are both recognised WHO ICTRP primary registries and satisfy the ICMJE registration requirement."
+  },
+  {
+    abbr: "Voluntary Registration",
+    name: "Voluntary Registration",
+    regions: ["US"],
+    definition: "Registration of a clinical trial in ClinicalTrials.gov where mandatory ACT requirements under 42 CFR Part 11 do not apply — for example, Phase I drug trials, observational studies, or expanded access protocols. Permitted under 42 CFR §11.60. May be appropriate for transparency purposes or where ICMJE journal publication is planned, as ICMJE requires prospective registration before first participant enrolment as a condition of publication."
   }
 ];
 

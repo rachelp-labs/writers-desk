@@ -10,24 +10,24 @@
 
   <style>
     :root {
-      --cream: #FBF8F4;
-      --warm-white: #FFFDF9;
-      --parchment: #F0E8D8;
-      --parchment-deep: #E8DCC8;
-      --tan: #D4C5A9;
-      --tan-dark: #B8A88A;
-      --brown: #7A6245;
-      --brown-dark: #3E2C1A;
-      --brown-mid: #5C4A32;
-      --brown-light: #9C8B75;
-      --text: #1A1008;
-      --text-soft: #4A3828;
-      --text-muted: #9C8B75;
-      --card-bg: #FDFAF6;
-      --card-border: #F0E8DA;
-      --accent: #7A6245;
-      --gold: #C9A84C;
-      --shadow-sm: 0 1px 4px rgba(62,44,26,0.08);
+      --cream: #FAF7F2;
+      --warm-white: #FFFFFF;
+      --parchment: #F0EDE7;
+      --parchment-deep: #E8E3D9;
+      --tan: #D9D2C5;
+      --tan-dark: #C4BAA8;
+      --brown: #2D6A6C;
+      --brown-dark: #1A1A1A;
+      --brown-mid: #2D6A6C;
+      --brown-light: #4A8A8C;
+      --text: #1A1A1A;
+      --text-soft: #3D3D3D;
+      --text-muted: #7A7A7A;
+      --card-bg: #FFFFFF;
+      --card-border: #E8E3D9;
+      --accent: #2D6A6C;
+      --gold: #2D6A6C;
+      --shadow-sm: 0 1px 4px rgba(26,26,26,0.07);
       --radius: 12px;
       --radius-sm: 8px;
     }
@@ -37,7 +37,7 @@
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
+      background: #FFFFFF;
       color: var(--text);
       line-height: 1.6;
       font-size: 16px;
@@ -46,7 +46,7 @@
 
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(251,248,244,0.93);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border);
       padding: 0 2rem;
@@ -81,23 +81,43 @@
     .hero h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
 
     .section-band {
-      background: #F7F3EC;
+      background: #FAF7F2;
       width: calc(100% - 4rem);
       max-width: 1060px;
       margin: 0 auto 2rem;
       border-radius: 16px;
-      border: 1px solid #D4C5A9;
-      box-shadow: 0 4px 24px rgba(62,44,26,0.13), 0 1px 4px rgba(62,44,26,0.08);
+      border: 1px solid #E8E3D9;
+      box-shadow: 0 4px 24px rgba(26,26,26,0.10), 0 1px 4px rgba(26,26,26,0.07);
     }
-    .section-band-inner { padding: 1.75rem 2rem; }
 
+    /* HERO BANNER */
+    .hero-banner { background: #FAF7F2; padding: 2rem 0; }
+    .hero-card {
+      background: #FFFFFF;
+      border: 1px solid #E8E3D9;
+      border-radius: 16px;
+      padding: 2.5rem 2.5rem 2.25rem;
+      box-shadow: 0 4px 18px rgba(26,26,26,0.10);
+      width: calc(100% - 4rem);
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+    .hero-card h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400; line-height: 1.15;
+      color: #1A1A1A; letter-spacing: -0.01em;
+      margin-bottom: 0;
+    }
+    .hero-card h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+
+    .section-band-inner { padding: 1.75rem 2rem; }
     .section-label {
       font-family: 'DM Mono', monospace; font-size: 0.68rem;
       letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--gold); margin-bottom: 0.6rem;
     }
 
-    /* ABOUT CARD */
     .about-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -149,7 +169,7 @@
       display: flex; flex-direction: column; gap: 1px;
       background: var(--card-border);
       border: 1px solid var(--card-border);
-      border-top: 2px solid var(--gold);
+      border-top: 2px solid var(--accent);
       border-radius: var(--radius); overflow: hidden;
       box-shadow: var(--shadow-sm);
       margin-bottom: 1.25rem;
@@ -239,20 +259,16 @@
   </div>
 </nav>
 
-<div class="page-wrap">
-  <div class="hero">
-    <p class="section-label">About</p>
-    <h1>Writers' <em>Desk.</em></h1>
+<div class="hero-banner">
+  <div class="hero-card">
+    <h1>About <em>Writers' Desk.</em></h1>
   </div>
 </div>
 
-<div class="section-band">
+<div class="section-band" style="margin-top: 2rem;">
   <div class="section-band-inner">
-    <p class="section-label">About</p>
-    <h2 class="section-title">What this site covers</h2>
-
     <div class="info-card">
-      Writers' Desk is a practical reference for medical writers working in clinical trials. It covers registration and disclosure requirements for the EU (CTIS) and US (ClinicalTrials.gov), including results posting obligations, key deadlines, and submission watchouts. The site also provides interactive decision trees, a quick reference guide, a glossary of regulatory terms, and curated updates as requirements evolve.
+      Writers' Desk is a practical reference for medical writers working in clinical trials covering registration and disclosure requirements for the EU (CTIS) and US (ClinicalTrials.gov). This site will be expanded over time to include additional regulatory information and health authority requirements.
     </div>
 
     <div class="info-card">
@@ -277,18 +293,23 @@
       </div>
       <div class="source-row">
         <span class="source-body">EMA</span>
-        <span class="source-title">Questions and Answers on the EU Clinical Trials Regulation — EMA/298962/2024</span>
-        <a href="https://www.ema.europa.eu/en/documents/other/questions-and-answers-query-management-working-group-ctis-and-ctr_en.pdf" target="_blank" class="source-link">Link →</a>
-      </div>
-      <div class="source-row">
-        <span class="source-body">EMA</span>
-        <span class="source-title">Guidance on the content and format of the CSR summary for submission to CTIS — EMA/369130/2022</span>
+        <span class="source-title">CTIS Sponsor Handbook v6.2 (March 2026)</span>
         <a href="https://www.ema.europa.eu/en/documents/other/clinical-trial-information-system-ctis-sponsor-handbook_en.pdf" target="_blank" class="source-link">Link →</a>
       </div>
       <div class="source-row">
         <span class="source-body">EMA</span>
-        <span class="source-title">Guideline on good pharmacovigilance practices (GVP) — Module VIII: Post-authorisation safety studies, Rev 3</span>
-        <a href="https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/pharmacovigilance-overview/good-pharmacovigilance-practices" target="_blank" class="source-link">Link →</a>
+        <span class="source-title">Revised CTIS Transparency Rules</span>
+        <a href="https://www.ema.europa.eu/en/documents/other/revised-ctis-transparency-rules_en.pdf" target="_blank" class="source-link">Link →</a>
+      </div>
+      <div class="source-row">
+        <span class="source-body">EMA</span>
+        <span class="source-title">Guidance document on how to approach the protection of personal data and commercially confidential information while using CTIS (Version 2.1, November 2025)</span>
+        <a href="https://accelerating-clinical-trials.europa.eu/system/files/2023-07/guidance-document-how-approach-protection-personal-data-commercially-confidential-information-while_.pdf" target="_blank" class="source-link">Link →</a>
+      </div>
+      <div class="source-row">
+        <span class="source-body">EMA</span>
+        <span class="source-title">Sponsor Frequently Asked Questions: CTIS FAQs on the Sponsor's workspace</span>
+        <a href="https://www.ema.europa.eu/en/documents/presentation/clinical-trial-information-system-ctis-frequently-asked-questions_en.pdf" target="_blank" class="source-link">Link →</a>
       </div>
     </div>
 
@@ -304,6 +325,11 @@
     <div class="source-list">
       <div class="source-row">
         <span class="source-body">US Congress</span>
+        <span class="source-title">42 U.S.C. 282(j) — Public Health Service Act: Clinical Trial Registration and Results Submission</span>
+        <a href="https://www.govinfo.gov/link/uscode/42/282" target="_blank" class="source-link">Link →</a>
+      </div>
+      <div class="source-row">
+        <span class="source-body">US Congress</span>
         <span class="source-title">Food and Drug Administration Amendments Act of 2007 (FDAAA) — Section 801</span>
         <a href="https://www.congress.gov/110/plaws/publ85/PLAW-110publ85.pdf" target="_blank" class="source-link">Link →</a>
       </div>
@@ -311,6 +337,11 @@
         <span class="source-body">NIH / NLM</span>
         <span class="source-title">42 CFR Part 11 — Clinical Trials Registration and Results Information Submission</span>
         <a href="https://www.ecfr.gov/current/title-42/chapter-I/subchapter-A/part-11" target="_blank" class="source-link">Link →</a>
+      </div>
+      <div class="source-row">
+        <span class="source-body">NIH / NLM</span>
+        <span class="source-title">Checklist for Evaluating Whether a Clinical Trial or Study is an Applicable Clinical Trial (ACT) Under 42 CFR 11.22(b)</span>
+        <a href="https://cdn.clinicaltrials.gov/documents/ACT_Checklist.pdf" target="_blank" class="source-link">Link →</a>
       </div>
       <div class="source-row">
         <span class="source-body">FDA</span>
@@ -340,7 +371,7 @@
       <p class="contact-label">Contact</p>
       <p style="margin-bottom: 1rem; font-size: 0.85rem; font-weight: 300; color: var(--text-soft); line-height: 1.75;">Writers' Desk is maintained to the best of my knowledge. If you spot something that needs updating, please get in touch.</p>
       <div class="contact-row">
-        <a href="mailto:writersdesk.contact@proton.me" class="contact-link">writersdesk.contact@proton.me</a>
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_HERE" target="_blank" class="contact-link">LinkedIn →</a>
       </div>
     </div>
 
